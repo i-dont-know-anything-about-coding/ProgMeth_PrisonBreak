@@ -4,6 +4,7 @@ import EscapeGame.Level.MainMenu;
 import EscapeGame.Logic.Inventory;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -18,6 +19,10 @@ public class PrisonBreakGame extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        Font.loadFont(getClass().getResourceAsStream("/fonts/BlackOpsOne-Regular.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Oswald-Regular.ttf"), 14);
+
         this.window = primaryStage;
         this.window.setTitle("Prison Break");
         this.window.setResizable(false); // ล็อคขนาดหน้าจอไม่ให้พังเวลาผู้เล่นดึงยืด
