@@ -1,34 +1,25 @@
 plugins {
     id 'java'
-    // 1. เพิ่ม plugin application เพื่อระบุคลาสหลักของโปรแกรม
     id 'application'
-    // 2. เพิ่ม plugin javafx สำหรับทำหน้าจอ GUI
-    id 'org.openjfx.javafxplugin' version '0.0.13'
-    // 3. เพิ่ม plugin shadow สำหรับมัดรวมโค้ด ภาพ และเสียง ให้อยู่ในไฟล์ .jar ไฟล์เดียว (สำคัญมากตอนส่งงาน!)
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'com.gradleup.shadow' version '8.3.5'
 }
 
 group = 'progmeth_2025_1'
 version = '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
-// 4. ตั้งค่า JavaFX
 javafx {
-    version = "17" // แนะนำให้ใช้ JDK 17 หรือ 21 ตามที่ลงไว้ในเครื่อง
-    // ต้องใส่ javafx.media เพื่อให้ใช้ระบบเสียง AudioClip ได้ (ทำคะแนนหัวข้อ Game)
-    modules = [ 'javafx.controls', 'javafx.media' ]
+    version = '17'
+    modules = [ 'javafx.controls', 'javafx.media', 'javafx.graphics' ]
 }
 
 application {
-    // 5. ระบุคลาสหลัก (ต้องชี้ไปที่ Launcher class เพื่อไม่ให้ไฟล์ JAR เออเร่อ)
-    mainClass = 'escapegame.Launcher'
+    mainClass = 'EscapeGame.Launcher'
 }
 
 dependencies {
-    // ของเดิมของคุณ (JUnit 5 สำหรับทำคะแนนหัวข้อ Test)
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -36,15 +27,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    // เพิ่มการแสดงผลใน Terminal ให้เห็นชัดๆ เวลาอาจารย์ดูว่าเทสผ่านไหม
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
+    testLogging { events 'passed', 'skipped', 'failed' }
 }
 
-// 6. ตั้งค่า Manifest ให้ไฟล์ JAR รู้ว่าต้องเริ่มรันที่คลาสไหน
 jar {
-    manifest {
-        attributes 'Main-Class': 'com.escapegame.Launcher'
-    }
+    manifest { attributes 'Main-Class': 'EscapeGame.Launcher' }
 }

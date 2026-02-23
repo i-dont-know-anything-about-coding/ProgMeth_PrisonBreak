@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -20,6 +21,7 @@ public class MainMenu {
 
     private Scene scene;
     private PrisonBreakGame game;
+    private MediaPlayer mediaPlayer;
 
     public MainMenu(PrisonBreakGame game) {
         this.game = game;
@@ -78,8 +80,24 @@ public class MainMenu {
         root.getChildren().addAll(bgView, layout);
         scene = new Scene(root, 800, 450);
 
-        btnStart.setOnAction(e -> System.out.println("เริ่มเกม!"));
-        btnCharacter.setOnAction(e -> PopupBox.display("Character Info", "ชื่อผู้เล่น: นักโทษ\nเป้าหมาย: หลบหนีออกจากคุก"));
+        // ── btnStart: หยุดวิดีโอ แล้วไป Level 1 ──
+        btnStart.setOnAction(e -> {
+            if (mediaPlayer != null) mediaPlayer.stop();
+            Level1Jail level1 = new Level1Jail(game);
+            game.switchScene(level1.getScene());
+        });
+
+        // ── character: รับชื่อผู้เล่น ──
+        btnCharacter.setOnAction(e -> {
+            TextInputDialog dialog = new TextInputDialog(game.getPlayerName());
+            dialog.setTitle("Character");
+            dialog.setHeaderText("ตั้งชื่อตัวละคร");
+            dialog.setContentText("ชื่อ:");
+            dialog.showAndWait().ifPresent(name -> {
+                if (!name.isBlank()) game.setPlayerName(name.trim());
+            });
+        });
+
         btnHowToPlay.setOnAction(e -> PopupBox.display("How to Play", "วิธีการเล่น:\n1. คลิกปุ่มเพื่อสำรวจ\n2. รวบรวมไอเทม\n3. แข่งกับเวลา!"));
         btnAboutUs.setOnAction(e -> PopupBox.display("About Us", "พัฒนาโดย: นิสิต\nใช้ JavaFX และ OOP"));
         btnExit.setOnAction(e -> Platform.exit());

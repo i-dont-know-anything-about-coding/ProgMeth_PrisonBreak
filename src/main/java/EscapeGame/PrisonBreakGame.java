@@ -14,6 +14,7 @@ public class PrisonBreakGame extends Application {
     private Stage window;
     // ระบบกระเป๋าเก็บของที่ผู้เล่นพกติดตัวไปได้ทุกด่าน (Logic)
     private Inventory inventory;
+    private String playerName = "Player";
 
     @Override
     public void start(Stage primaryStage) {
@@ -28,6 +29,12 @@ public class PrisonBreakGame extends Application {
         MainMenu menu = new MainMenu(this);
         window.setScene(menu.getScene());
         window.show();
+    }
+
+    public void resetGame() {
+        this.inventory = new Inventory();
+        MainMenu menu = new MainMenu(this);
+        switchScene(menu.getScene());
     }
 
     /**
@@ -46,6 +53,8 @@ public class PrisonBreakGame extends Application {
         return inventory;
     }
 
+    public String getPlayerName()           { return playerName; }
+    public void setPlayerName(String name)  { this.playerName = name; }
     public static void main(String[] args) {
         launch(args); // คำสั่งเริ่มระบบ JavaFX
     }

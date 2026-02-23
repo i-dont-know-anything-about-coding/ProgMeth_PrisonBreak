@@ -30,4 +30,6 @@ public class Inventory {
     public int getSize() {
         return this.items.size();
     }
+
+    public void clear() { items.clear(); }
 }
