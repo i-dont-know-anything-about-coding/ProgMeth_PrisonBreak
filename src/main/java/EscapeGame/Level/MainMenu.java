@@ -1,5 +1,6 @@
 package EscapeGame.Level;
 
+import EscapeGame.Gui.CharacterSelect;
 import EscapeGame.Gui.PopupBox;
 import EscapeGame.PrisonBreakGame;
 import javafx.application.Platform;
@@ -194,7 +195,7 @@ public class MainMenu {
 
         Label panelHeader = new Label("— SELECT —");
         panelHeader.setStyle(
-                "-fx-font-family: 'Oswald';" +
+                "-fx-font-family: 'Courier New';" +
                         "-fx-font-size: 11px;" +
                         "-fx-font-weight: 400;" +
                         "-fx-text-fill: #55585F;" +
@@ -232,18 +233,24 @@ public class MainMenu {
             game.switchScene(level1.getScene());
         });
         btnCharacter.setOnAction(e -> {
-            TextInputDialog dialog = new TextInputDialog(game.getPlayerName());
-            dialog.setTitle("Character");
-            dialog.setHeaderText("ตั้งชื่อตัวละคร");
-            dialog.setContentText("ชื่อ:");
-            dialog.showAndWait().ifPresent(name -> {
-                if (!name.isBlank()) game.setPlayerName(name.trim());
+            CharacterSelect.display((charIndex, playerName) -> {
+                game.setPlayerName(playerName);
+                // charIndex: 0 = ชาย, 1 = หญิง
             });
         });
-        btnHowToPlay.setOnAction(e -> PopupBox.display("How to Play",
-                "วิธีการเล่น:\n1. คลิกปุ่มเพื่อสำรวจ\n2. รวบรวมไอเทม\n3. แข่งกับเวลา!"));
-        btnAboutUs.setOnAction(e -> PopupBox.display("About Us",
-                "พัฒนาโดย: นิสิต\nใช้ JavaFX และ OOP"));
+    // How To Play — เพิ่มรายละเอียด
+        btnHowToPlay.setOnAction(e -> PopupBox.display("HOW TO PLAY",
+                "1. กด START GAME เพื่อเริ่มเกม\n" +
+                        "2. สำรวจห้องและคลิกสิ่งของต่างๆ\n" +
+                        "3. เก็บไอเทมและใช้งานให้ถูกจุด\n" +
+                        "4. หาทางหนีออกจากคุกก่อนหมดเวลา!"));
+
+    // About Us — เพิ่มข้อมูลทีม
+        btnAboutUs.setOnAction(e -> PopupBox.display("ABOUT US",
+                "Prison Break – Escape Game\n\n" +
+                        "Member\n" +
+                        "Flim Meen Janjao\n" +
+                        "เครื่องมือ: Java + JavaFX"));
         btnExit.setOnAction(e -> Platform.exit());
     }
 
@@ -262,7 +269,7 @@ public class MainMenu {
         String base = String.format(
                 "-fx-background-color: linear-gradient(to bottom, %s, %s);" +
                         "-fx-text-fill: %s;" +
-                        "-fx-font-family: 'Oswald';" +
+                        "-fx-font-family: 'Courier New';" +
                         "-fx-font-size: 17px;" +
                         "-fx-font-weight: 500;" +
                         "-fx-letter-spacing: 1;" +
@@ -280,7 +287,7 @@ public class MainMenu {
         String hover = String.format(
                 "-fx-background-color: linear-gradient(to bottom, %s, %s);" +
                         "-fx-text-fill: %s;" +
-                        "-fx-font-family: 'Oswald';" +
+                        "-fx-font-family: 'Courier New';" +
                         "-fx-font-size: 17px;" +
                         "-fx-font-weight: 500;" +
                         "-fx-letter-spacing: 1;" +

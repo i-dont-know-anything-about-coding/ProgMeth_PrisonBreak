@@ -12,7 +12,7 @@ repositories { mavenCentral() }
 
 javafx {
     version = '17'
-    modules = [ 'javafx.controls', 'javafx.media', 'javafx.graphics' ]
+    modules = [ 'javafx.controls', 'javafx.media', 'javafx.graphics', 'javafx.fxml' ]
 }
 
 application {

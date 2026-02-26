@@ -22,6 +22,10 @@ public class PrisonBreakGame extends Application {
 
         Font.loadFont(getClass().getResourceAsStream("/fonts/BlackOpsOne-Regular.ttf"), 14);
         Font.loadFont(getClass().getResourceAsStream("/fonts/Oswald-Regular.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/RubikDirt-Regular.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/ChakraPetch-Bold.ttf"), 14);
+
+        System.out.println(javafx.scene.text.Font.getFamilies());
 
         this.window = primaryStage;
         this.window.setTitle("Prison Break");
